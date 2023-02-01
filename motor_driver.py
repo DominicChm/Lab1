@@ -56,9 +56,14 @@ class MotorDriver:
 if __name__ == '__main__':
     m1 = MotorDriver(pyb.Pin.board.PA10, pyb.Pin.board.PB4, pyb.Pin.board.PB5, 3)
     enc = EncoderReader(pyb.Pin.board.PB6, pyb.Pin.board.PB7, 4)
+    dir = 1
     level = 0
     while True:
         print(enc.read())
         pyb.delay(50)
         m1.set_duty_cycle(level)
+        level += dir
+
+        if level <= -100 or level >= 100:
+            dir = -dir
 
