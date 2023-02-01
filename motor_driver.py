@@ -15,8 +15,7 @@ class MotorDriver:
         @param en_pin GPIO pin that enables the motor to run
         @param in1pin GPIO pin number for the first motor output pin
         @param in2pin GPIO pin number for the second motor output pin
-        @param in1pin GPIO pin number for the first motor output pin
-        @param timer GPIO pin for the time that is used in running the motor
+        @param timer number that corresponds to passed motor GPIO
         """
         print("Creating a motor driver")
         # initialize GPIO
@@ -37,8 +36,8 @@ class MotorDriver:
         to the motor to the given level. Positive values
         cause torque in one direction, negative values
         in the opposite direction.
-        @param level A signed integer holding the duty
-                cycle of the voltage sent to the motor
+        @param level A signed float holding the duty
+                cycle of the voltage sent to the motor, -100-100
         """
         #
         if level < 0:
@@ -55,10 +54,8 @@ class MotorDriver:
 
 
 if __name__ == '__main__':
-    # this is a comment
     m1 = MotorDriver(pyb.Pin.board.PA10, pyb.Pin.board.PB4, pyb.Pin.board.PB5, 3)
     enc = EncoderReader(pyb.Pin.board.PB6, pyb.Pin.board.PB7, 4)
-    #m2 = MotorDriver(pyb.Pin.board.PC1, pyb.Pin.board.PA0, pyb.Pin.board.PA1, 5)
     level = 0
     while True:
         print(enc.read())
